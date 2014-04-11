@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="at.bestsolution.rap.tooling.css.rapcssprovider">
+   <implementation class="at.bestsolution.rap.tooling.css.RAPCSSModelProvider"/>
+   <service>
+      <provide interface="org.eclipse.fx.ide.css.cssext.ICSSExtModelProvider"/>
+   </service>
+</scr:component>
