@@ -743,6 +743,14 @@ package rap {
 		 * Shadow for text. 
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to disabled Combos.
+		 */
+		:disabled
+		/**
+		 * Applies to focused Combos.
+		 */ 
+		:focused 
 	}
 	Combo-Button {
 		/**
@@ -773,12 +781,32 @@ package rap {
 		 *  The width of the drop-down button of the Combo. 
 		 */
 		width <prop-width>;
+		/**
+		 * Applies when the button is disabled.
+		 */
+		:disabled
+		/**
+		 * Applies while the user hovers over the combo button.
+		 */ 
+		:hover
+		/**
+		 * Applies while a button is pressed.
+		 */ 
+		:pressed 
 	}
 	Combo-Button-Icon {
 		/**
 		 *  The icon for the Combo drop-down button. 
 		 */
-		background-image <prop-background-image>; 
+		background-image <prop-background-image>;
+		/**
+		 * Applies when the button is disabled.
+		 */
+		:disabled
+		/**
+		 * Applies while the user hovers over the combo button.
+		 */
+		:hover 
 	}
 	Combo-Field {
 		/** 
@@ -829,6 +857,10 @@ package rap {
 		box-shadow <prop-box-shadow>;
 		opacity <prop-opacity>;
 		padding <prop-padding>;
+		/**
+		 * Applies while the user hovers over a composite.
+		 */
+		:hover 
 	}
 	CoolBar {
 		/**
@@ -882,7 +914,15 @@ package rap {
 		/**
 		 * Shadow for text.
 		 */
-		text-shadow <prop-text-shadow>; 
+		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to disbled DateTime controls.
+		 */ 
+		:disabled 
+		/**
+		 * Applies to focused DateTime controls.
+		 */
+		:focused 
 	}
 	DateTime-Field {
 		/**
@@ -901,6 +941,10 @@ package rap {
 		 * Shadow for text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to selected DateTime fields.
+		 */
+		:selected 
 	}
 	DateTime-Calendar-Day {
 		/**
@@ -915,6 +959,22 @@ package rap {
 		 * Shadow for text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies while the user hovers over the calendar day.
+		 */
+		:hover
+		/**
+		 * Applies to the day that belongs to other month.
+		 */
+		:otherMonth 
+		/**
+		 * Applies to selected day.
+		 */
+		:selected 
+		/**
+		 * Applies to the day on unfocused calendar.
+		 */
+		:unfocused
 	}
 	DateTime-Calendar-Navbar {
 		/**
@@ -945,6 +1005,10 @@ package rap {
 		 * Shadow for text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to disbled DateTime controls.
+		 */
+		:disabled 
 	}
 	DateTime-Calendar-PreviousMonthButton {
 		/**
@@ -955,6 +1019,14 @@ package rap {
 		 * Calendar previous month button cursor.
 		 */
 		cursor <prop-cursor>;
+		/**
+		 * Applies to disabled Calendar previous month button.
+		 */
+		:disabled
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover 
 	}
 	DateTime-Calendar-NextMonthButton {
 		/**
@@ -965,6 +1037,14 @@ package rap {
 		 * Calendar next month button cursor.
 		 */
 		cursor <prop-cursor>;
+		/**
+		 * Applies to disabled Calendar next month button.
+		 */
+		:disabled
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover 
 	}
 	DateTime-Calendar-PreviousYearButton {
 		/**
@@ -975,6 +1055,14 @@ package rap {
 		 * Calendar previous year button cursor.
 		 */
 		cursor <prop-cursor>;
+		/**
+		 * Applies to disabled Calendar previous year button.
+		 */
+		:disabled 
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover 
 	}
 	DateTime-Calendar-NextYearButton {
 		/**
@@ -985,6 +1073,14 @@ package rap {
 		 * Calendar next year button cursor.
 		 */
 		cursor <prop-cursor>;
+		/**
+		 * Applies to disabled Calendar next year button.
+		 */
+		:disabled 
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover 
 	}
 	DateTime-UpButton {
 		/**
@@ -1015,12 +1111,36 @@ package rap {
 		 *  The width of the DateTime Date/Time up button. 
 		 */
 		width <prop-width>;
+		/**
+		 * Applies to disabled DateTime up button.
+		 */
+		:disabled
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover
+		/**
+		 * Applies while a button is pressed.
+		 */
+		:pressed 
 	}
 	DateTime-UpButton-Icon {
 		/**
 		 * The icon for DateTime up button.
 		 */
 		background-image <prop-background-image>;
+		/**
+		 * Applies to disabled DateTime up button.
+		 */
+		:disabled 
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover
+		/**
+		 * Applies while a button is pressed.
+		 */  
+		:pressed 
 	}
 	DateTime-DownButton {
 		/**
@@ -1051,12 +1171,36 @@ package rap {
 		 *  The width of the DateTime Date/Time down button. 
 		 */
 		width <prop-width>;
+		/**
+		 * Applies to disabled DateTime down button.
+		 */
+		:disabled
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover
+		/**
+		 * Applies while a button is pressed.
+		 */
+		:pressed 
 	}
 	DateTime-DownButton-Icon {
 		/**
 		 * The icon for DateTime down button.
 		 */
-		background-image <prop-background-image>; 
+		background-image <prop-background-image>;
+		/**
+		 * Applies to disabled DateTime down button.
+		 */ 
+		:disabled 
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover 
+		/**
+		 * Applies while a button is pressed.
+		 */
+		:pressed 
 	}
 	DateTime-DropDownButton {
 		/**
@@ -1087,12 +1231,32 @@ package rap {
 		 *  The width of the DateTime Date drop-down button. 
 		 */
 		width <prop-width>;
+		/**
+		 * Applies to disabled DateTime Date drop-down button.
+		 */
+		:disabled 
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover 
+		/**
+		 * Applies while a button is pressed.
+		 */
+		:pressed 
 	}
 	DateTime-DropDownButton-Icon {
 		/**
 		 *  The icon for the DateTime drop-down button. 
 		 */
 		background-image <prop-background-image>;
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover 
+		/**
+		 * Applies while a button is pressed.
+		 */
+		:pressed 
 	}
 	DateTime-DropDownCalendar {
 		/**
@@ -1117,6 +1281,10 @@ package rap {
 		 *  Font for expand item boxes. Applied to the expand item header label. 
 		 */
 		font <prop-font>;
+		/**
+		 * Applies to disbled ExpandBar controls.
+		 */
+		:disabled 
 	}
 	ExpandItem {
 		/**
@@ -1127,6 +1295,10 @@ package rap {
 		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
 		 */
 		border-radius <prop-border-radius>; 
+		/**
+		 * Applies while the ExpandItem is expanded.
+		 */
+		:expanded 
 	}
 	ExpandItem-Header {
 		/**
@@ -1153,12 +1325,28 @@ package rap {
 		 * Shadow for text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies for disabled ExpandBars.
+		 */
+		:disabled 
+		/**
+		 * Applies while the ExpandItem is expanded.
+		 */
+		:expanded 
 	}
 	ExpandItem-Button {
 		/**
 		 *  Background image for the ExpandItem collapse/expand button. The size of the image should be 16 x 16 pixels. 
 		 */
 		 background-image <prop-background-image>;
+		 /**
+		  * Applies while the ExpandItem is expanded.
+		  */
+		 :expanded 
+		 /**
+		  * Applies while the user hovers over a button.
+		  */
+		 :hover 
 	}
 	FileUpload {
 		/**
@@ -1211,6 +1399,19 @@ package rap {
 		 * Shadow for text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies for disabled FileUpload controls.
+		 */
+		:disabled 
+		/**
+		 * Applies while the user hovers over a FileUpload control.
+		 */
+		:hover 
+		/**
+		 * Applies while a FileUpload control is pressed.
+		 */
+		:pressed 
+		 
 	}
 	FileUpload-FocusIndicator {
 		/**
@@ -1251,6 +1452,10 @@ package rap {
 		 * Font for group boxes. Applied to the group box label.
 		 */
 		font <prop-font>;
+		/**
+		 * Applies to disabled group boxes.
+		 */
+		:disabled
 	}
 	Group-Frame {
 		/**
@@ -1269,6 +1474,14 @@ package rap {
 		 * Padding for group box frames (inner distance between frame border and content).
 		 */
 		padding <prop-padding>;
+		/**
+		 * Applies to the frame of a disabled group box.
+		 */
+		:disabled 
+		/**
+		 * Applies while the cursor hovers over the group box frame.
+		 */
+		:hover 
 	}
 	Group-Label {
 		/**
@@ -1299,6 +1512,10 @@ package rap {
 		 * Shadow for text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies while the cursor hovers over the group box label.
+		 */
+		:hover 
 	}
 	Label {
 		/**
@@ -1343,6 +1560,15 @@ package rap {
 		 * Shadow for text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to disabled labels.
+		 */
+		:disabled 
+		/**
+		 * Applies to widgets while the cursor hovers over them.
+		 */
+		:hover 
+		 
 	}
 	Label-SeparatorLine {
 		/**
@@ -1393,6 +1619,10 @@ package rap {
 		 * Shadow for text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies when Link is disabled.
+		 */
+		:disabled 
 	}
 	Link-Hyperlink {
 		/**
@@ -1407,6 +1637,14 @@ package rap {
 		 * Shadow for hyperlinks in Link widget.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to hyperlinks of a disabled Link widget.
+		 */
+		:disabled 
+		/**
+		 * Applies while the user hovers over a hyperlink.
+		 */
+		:hover 
 	}
 	List {
 		/**
@@ -1425,6 +1663,14 @@ package rap {
 		 * Font for lists.
 		 */
 		font <prop-font>;
+		/**
+		 * Applies to disabled Lists.
+		 */
+		:disabled
+		/**
+		 * Applies to focused Lists.
+		 */
+		:focused 
 	}
 	List-Item {
 		/**
@@ -1447,6 +1693,26 @@ package rap {
 		 * Shadow for items text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies when List is disabled.
+		 */
+		:disabled
+		/**
+		 * Applies to items with an even index.
+		 */
+		:even 
+		/**
+		 * Applies while the user hovers over the list item.
+		 */
+		:hover 
+		/**
+		 * Applies to selected items.
+		 */
+		:selected 
+		/**
+		 * Applies to items on unfocused lists.
+		 */
+		:unfocused 
 	}
 	Menu {
 		/**
@@ -1489,6 +1755,10 @@ package rap {
 		 * Space between border and text / image
 		 */
 		padding <prop-padding>;
+		/**
+		 * Applies to disabled menus.
+		 */
+		:disabled 
 	}
 	MenuItem {
 		/**
@@ -1515,24 +1785,52 @@ package rap {
 		 * Shadow for text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to disabled menu items.
+		 */
+		:disabled
+		/**
+		 * On mouse over
+		 */
+		:hover
+		/**
+		 * Applies to menu items in the menu bar.
+		 */
+		:onMenuBar 
+		/**
+		 * On mouse down and open submenu. Only for menu-bars.
+		 */
+		:pressed 
 	}
 	MenuItem-CheckIcon {
 		/**
 		 *  The icon image. The maximum size of the image should be 16 x 16 pixels. 
 		 */
 		background-image <prop-background-image>;
+		/**
+		 * Applies when the menu is disabled.
+		 */
+		:disabled 
 	}
 	MenuItem-RadioIcon {
 		/**
 		 *  The icon image. The maximum size of the image should be 16 x 16 pixels. 
 		 */
 		background-image <prop-background-image>;
+		/**
+		 * Applies when the menu is disabled.
+		 */
+		:disabled 
 	}
 	MenuItem-CascadeIcon {
 		/**
 		 *  The icon image. The maximum size of the image should be 16 x 16 pixels. 
 		 */
 		background-image <prop-background-image>;
+		/**
+		 * Applies when the menu is disabled.
+		 */
+		:disabled 
 	}
 	ProgressBar {
 		/**
@@ -1555,6 +1853,10 @@ package rap {
 		 *  Represents the width of the progress bar if it's vertical or the height, if it's horizontal. 
 		 */
 		width <prop-width>;
+		/**
+		 * Applies to disabled progress bars.
+		 */
+		:disabled 
 	}
 	ProgressBar-Indicator {
 		/**
@@ -1573,6 +1875,18 @@ package rap {
 		 * The opacity of the indicator. A value between 0 and 1.
 		 */
 		opacity <prop-opacity>;
+		/**
+		 * Applies to the progress indicator of a disabled progress bar.
+		 */
+		:disabled
+		/**
+		 * Applies to the progress indicator of a progress bar in ERROR state.
+		 */
+		:error
+		/**
+		 * Applies to the progress indicator of a progress bar in PAUSED state.
+		 */
+		:paused 
 	}
 	Sash {
 		/**
@@ -1587,12 +1901,25 @@ package rap {
 		 * The border around the sash.
 		 */
 		border <prop-border>;
+		/**
+		 * Applies while the user hovers over a sash.
+		 */
+		:hover
+		 
 	}
 	Sash-Handle {
 		/**
 		 * Background image for sash handle
 		 */
 		 background-image <prop-background-image>;
+		 /**
+		  *  Applies while a sash is in horizontal state. This state responds to sash SWT.HORIZONTAL style flag. 
+		  */
+		 :horizontal
+		 /**
+		  *  Applies while a sash is in vertical state. This state responds to sash SWT.VERTICAL style flag. 
+		  */
+		 :vertical 
 	}
 	Scale {
 		/**
@@ -1607,6 +1934,14 @@ package rap {
 		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
 		 */
 		border-radius <prop-border-radius>;
+		/**
+		 * Applies to disabled Scale controls.
+		 */
+		:disabled 
+		/**
+		 * On focus
+		 */
+		:focused 
 	}
 	Scale-Thumb {
 		/**
@@ -1621,6 +1956,14 @@ package rap {
 		 * Thumb border radius
 		 */
 		border-radius <prop-border-radius>;
+		/**
+		 * Applies to the thumb of a disabled Scale control.
+		 */
+		:disabled
+		/**
+		 * On scale-focus
+		 */ 
+		:focused 
 	}
 	ScrollBar {
 		/**
@@ -1643,6 +1986,10 @@ package rap {
 		 *  Represents the width of the scrollbar if it's vertical or the height, if it's horizontal. 
 		 */
 		width <prop-width>;
+		/**
+		 * Applies to disabled scrollbars.
+		 */
+		:disabled
 	}
 	ScrollBar-Thumb {
 		/**
@@ -1662,6 +2009,14 @@ package rap {
 		 */
 		border-radius <prop-border-radius>;
 //		min-height <prop-min-height>;
+		/**
+		 * On thumb roll over
+		 */
+ 		:hover
+ 		/**
+ 		 * On thumb pressed
+ 		 */ 
+ 		:pressed 
 	}
 	ScrollBar-Thumb-Icon {
 		/**
@@ -1690,12 +2045,28 @@ package rap {
 		 * Scrollbar down button cursor.
 		 */
 		cursor <prop-cursor>;
+		/**
+		 * Applies to disabled scrollbar down button.
+		 */
+		:disabled
+		/**
+		 * On button roll over
+		 */
+		:hover
+		/**
+		 * On button pressed
+		 */
+		:pressed 
 	}
 	ScrollBar-DownButton-Icon {
 		/**
 		 *  The icon for the scrollbar down button. 
 		 */
 		 background-image  <prop-background-image>;
+		 /**
+		  * Applies while the user hovers over the button.
+		  */
+		 :hover 
 	}
 	ScrollBar-UpButton {
 		/**
@@ -1718,12 +2089,28 @@ package rap {
 		 * Scrollbar up button cursor.
 		 */
 		cursor <prop-cursor>;
+		/**
+		 * Applies to disabled scrollbar up button.
+		 */
+		:disabled
+		/**
+		 * On button roll over
+		 */ 
+		:hover
+		/**
+		 * On button pressed
+		 */
+		:pressed 
 	}
 	ScrollBar-UpButton-Icon {
 		/**
 		 *  The icon for the scrollbar up button. 
 		 */
 		background-image <prop-background-image>;
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover 
 	}
 	Shell {
 		/**
@@ -1758,6 +2145,14 @@ package rap {
 		 * Padding around the shell's client area.
 		 */
 		padding <prop-padding>;
+		/**
+		 * Applies for all shells except the active shell.
+		 */
+		:inactive 
+		/**
+		 * Applies for shells that are currently maximized.
+		 */
+		:maximized 
 	}
 	Shell-Titlebar {
 		/**
@@ -1804,6 +2199,10 @@ package rap {
 		 * Shadow for title bar text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies for all shells except the active shell.
+		 */
+		:inactive 
 	}
 	Shell-MinButton {
 		/**
@@ -1814,6 +2213,18 @@ package rap {
 		 * Margin for the minimize button.
 		 */ 
 		margin <prop-margin>;
+		/**
+		 * Applies for shell buttons on mouse-over.
+		 */
+		:hover
+		/**
+		 * Applies for shell buttons on inactive shells.
+		 */
+		:inactive 
+		/**
+		 * Applies for shell buttons on maximized shells.
+		 */
+		:maximized 
 	}
 	Shell-MaxButton {
 		/**
@@ -1824,6 +2235,18 @@ package rap {
 		 * Margin for the shell maximize/restore button.
 		 */
 		margin <prop-margin>;
+		/**
+		 * Applies for shell buttons on mouse-over.
+		 */
+		:hover
+		/**
+		 * Applies for shell buttons on inactive shells.
+		 */
+		:inactive
+		/**
+		 * Applies for shell buttons on maximized shells.
+		 */
+		:maximized 
 	}
 	Shell-CloseButton {
 		/**
@@ -1834,6 +2257,18 @@ package rap {
 		 * Margin for the shell close button.
 		 */
 		margin <prop-margin>;
+		/**
+		 * Applies for shell buttons on mouse-over.
+		 */
+		:hover 
+		/**
+		 * Applies for shell buttons on inactive shells.
+		 */
+		:inactive 
+		/**
+		 * Applies for shell buttons on maximized shells.
+		 */
+		:maximized 
 	}
 	Shell-DisplayOverlay {
 		/**
@@ -1866,6 +2301,14 @@ package rap {
 		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
 		 */
 		border-radius <prop-border-radius>;
+		/**
+		 * Applies to disabled sliders.
+		 */
+		:disabled
+		/**
+		 * On focus
+		 */
+		:focused 
 	}
 	Slider-Thumb {
 		/**
@@ -1884,6 +2327,18 @@ package rap {
 		 * Thumb border radius
 		 */
 		border-radius <prop-border-radius>;
+		/**
+		 * On slider-focus
+		 */
+		:focused
+		/**
+		 * On thumb roll over
+		 */
+		:hover 
+		/**
+		 * On thumb pressed
+		 */
+		:pressed 
 	}
 	Slider-DownButton {
 		/**
@@ -1910,12 +2365,44 @@ package rap {
 		 * Padding (inner distance) for Slider down button.
 		 */
 		padding <prop-padding>;
+		/**
+		 * Applies to disabled Slider down button.
+		 */
+		:disabled
+		/**
+		 *  Corresponds to SWT.HORIZONTAL state of the slider. (deprecated, use HORIZONTAL instead) 
+		 */
+		:horizontal
+		/**
+		 * On button roll over
+		 */
+		:hover 
+		/**
+		 * On button pressed
+		 */
+		:pressed 
+		/**
+		 *  Corresponds to SWT.VERTICAL state of the slider. (deprecated, use VERTICAL instead) 
+		 */
+		:vertical 
 	}
 	Slider-DownButton-Icon {
 		/**
 		 *  The icon for the Slider down button. 
 		 */
 		background-image <prop-background-image>;
+		/**
+		 *  Corresponds to SWT.HORIZONTAL state of the slider. (deprecated, use HORIZONTAL instead) 
+		 */
+		:horizontal 
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover 
+		/**
+		 *  Corresponds to SWT.VERTICAL state of the slider. (deprecated, use VERTICAL instead) 
+		 */
+		:vertical 
 	}
 	Slider-UpButton {
 		/**
@@ -1942,12 +2429,44 @@ package rap {
 		 * Padding (inner distance) for Slider up button.
 		 */
 		padding <prop-padding>;
+		/**
+		 * Applies to disabled Slider up button.
+		 */
+		:disabled 
+		/**
+		 *  Corresponds to SWT.HORIZONTAL state of the slider. (deprecated, use HORIZONTAL instead) 
+		 */
+		:horizontal 
+		/**
+		 * On button roll over
+		 */
+		:hover 
+		/**
+		 * On button pressed
+		 */
+		:pressed
+		/**
+		 *  Corresponds to SWT.VERTICAL state of the slider. (deprecated, use VERTICAL instead) 
+		 */
+		:vertical  
 	}
 	Slider-UpButton-Icon {
 		/**
 		 *  The icon for the Slider up button. 
 		 */
 		 background-image <prop-background-image>;
+		 /**
+		  *  Corresponds to SWT.HORIZONTAL state of the slider. (deprecated, use HORIZONTAL instead) 
+		  */
+		 :horizontal
+		 /**
+		  * Applies while the user hovers over the button.
+		  */ 
+		 :hover 
+		 /**
+		  *  Corresponds to SWT.VERTICAL state of the slider. (deprecated, use VERTICAL instead) 
+		  */
+		 :vertical 
 	}
 	Spinner {
 		/**
@@ -1986,6 +2505,14 @@ package rap {
 		 * Shadow for text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to disabled Spinner controls.
+		 */
+		:disabled
+		/**
+		 * Applies to focused Spinners
+		 */
+		:focused 
 	}
 	Spinner-Field {
 		/**
@@ -2022,12 +2549,36 @@ package rap {
 		 * Width of the spinner up button.
 		 */
 		width <prop-width>;
+		/**
+		 * Applies to disabled spinner up button.
+		 */
+		:disabled 
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover 
+		/**
+		 * Applies while a button is pressed.
+		 */
+		:pressed 
 	}
 	Spinner-UpButton-Icon {
 		/**
 		 * The icon for spinner up button.
 		 */
 		 background-image <prop-background-image>;
+		 /**
+		  * Applies to disabled spinner up button.
+		  */
+		 :disabled
+		 /**
+		  * Applies while the user hovers over the button.
+		  */
+		 :hover 
+		 /**
+		  * Applies while a button is pressed.
+		  */
+		 :pressed 
 	}
 	Spinner-DownButton {
 		/**
@@ -2058,12 +2609,36 @@ package rap {
 		 * Width of the spinner down button.
 		 */
 		width <prop-width>;
+		/**
+		 * Applies to disabled spinner down button.
+		 */
+		:disabled 
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover 
+		/**
+		 * Applies while a button is pressed.
+		 */
+		:pressed 
 	}
 	Spinner-DownButton-Icon {
 		/**
 		 * The icon for spinner down button.
 		 */
 		 background-image <prop-background-image>;
+		 /**
+		  * Applies to disabled spinner down button.
+		  */
+		 :disabled 
+		 /**
+		  * Applies while the user hovers over the button.
+		  */
+		 :hover 
+		 /**
+		  * Applies while a button is pressed.
+		  */
+		 :pressed 
 	}
 	TabFolder {
 		/**
@@ -2100,6 +2675,26 @@ package rap {
 		 * Shadow for text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to tab items in a disabled tab folder.
+		 */
+		:disabled 
+		/**
+		 * Applies to the first tab item.
+		 */
+		:first 
+		/**
+		 * On mouse over
+		 */
+		:hover 
+		/**
+		 * Applies to the last tab item.
+		 */
+		:last 
+		/**
+		 * On tab item selection
+		 */
+		:selected 
 	}
 	TabFolder-ContentContainer {
 		/**
@@ -2128,6 +2723,18 @@ package rap {
 		 * Font for tables.
 		 */
 		font <prop-font>;
+		/**
+		 * Applies to disabled tables.
+		 */
+		:disabled
+		/**
+		 * Applies to a table with gridlines.
+		 */
+		:linesvisible 
+		/**
+		 * Applies to a table with a row template.
+		 */
+		:rowtemplate 
 	}
 	TableItem {
 		/**
@@ -2150,6 +2757,34 @@ package rap {
 		 * Shadow for item text.
 		 */ 
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to the items of a disabled table.
+		 */
+		:disabled 
+		/**
+		 * Applies when the table item has an even index
+		 */
+		:even 
+		/**
+		 * Applies while the user hovers over the table item.
+		 */
+		:hover 
+		/**
+		 * Applies to the items of a table with gridlines.
+		 */
+		:linesvisible
+		/**
+		 * Applies to the items of a table with a row template.
+		 */ 
+		:rowtemplate 
+		/**
+		 * Applies when table item is selected.
+		 */
+		:selected 
+		/**
+		 * Applies to items on unfocused table.
+		 */
+		:unfocused 
 	}
 	Table-RowOverlay {
 		/**
@@ -2164,6 +2799,34 @@ package rap {
 		 * Table item text color
 		 */
 		color <prop-color>;
+		/**
+		 * Applies to the items of a disabled table.
+		 */
+		:disabled 
+		/**
+		 * Applies when the table item has an even index
+		 */
+		:even 
+		/**
+		 * Applies while the user hovers over the table item.
+		 */
+		:hover 
+		/**
+		 * Applies to the items of a table with gridlines.
+		 */
+		:linesvisible 
+		/**
+		 * Applies to the items of a table with a row template.
+		 */
+		:rowtemplate 
+		/**
+		 * Applies when table item is selected.
+		 */
+		:selected 
+		/**
+		 * Applies to items on unfocused table.
+		 */
+		:unfocused 
 	}
 	TableColumn {
 		/**
@@ -2194,12 +2857,28 @@ package rap {
 		 * Shadow for table columns.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Reflects Table#setEnabled()
+		 */
+		:disabled 
+		/**
+		 * On mouse over
+		 */
+		:hover 
 	}
 	TableColumn-SortIndicator {
 		/**
 		 * Indicator image for table sorting (up/down)
 		 */
 		background-image  <prop-background-image>;
+		/**
+		 * On sorting down
+		 */
+		:down 
+		/**
+		 * On sorting up
+		 */
+		:up 
 	}
 	Table-Cell {
 		/**
@@ -2216,6 +2895,22 @@ package rap {
 		 * Grid line color when linesVisible is true
 		 */
 		 color <prop-color>;
+		 /**
+		  * Applies for grid lines in header.
+		  */
+		 :header 
+		 /**
+		  * Applies for horizontal grid lines.
+		  */
+		 :horizontal 
+		 /**
+		  * Applies for grild lines in a table with a row template
+		  */
+		 :rowtemplate 
+		 /**
+		  * Applies for vertical grid lines.
+		  */
+		 :vertical 
 	}
 	Table-Checkbox {
 		/**
@@ -2227,6 +2922,22 @@ package rap {
 		 */ 
 		margin <prop-margin>;
 //		width <prop-width>; // deprecated
+ 		/**
+ 		 * When table checkbox is checked
+ 		 */
+ 		:checked 
+ 		/**
+ 		 * Applies to the items of a disabled table.
+ 		 */
+ 		:disabled 
+ 		/**
+ 		 * When table checkbox is grayed
+ 		 */
+ 		:grayed 
+ 		/**
+ 		 * Applies while the user hovers over a table check box.
+ 		 */
+ 		:hover 
 	}
 	Text {
 		/**
@@ -2267,6 +2978,18 @@ package rap {
 		 * Shadow for text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to disabled Texts.
+		 */
+		:disabled
+		/**
+		 * Applies to focused Texts.
+		 */
+		:focused 
+		/**
+		 * Applies to text fields in read-only mode.
+		 */
+		:read-only 
 	}
 	Text-Message {
 		/**
@@ -2335,6 +3058,10 @@ package rap {
 		 * Spacing between the tool items
 		 */
 		spacing <prop-spacing>;
+		/**
+		 * Applies to disabled tool bars
+		 */
+		:disabled 
 	}
 	ToolItem {
 		/**
@@ -2377,6 +3104,22 @@ package rap {
 		 * Shadow for text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to disabled tool items.
+		 */
+		:disabled 
+		/**
+		 * Applies on mouse over.
+		 */
+		:hover 
+		/**
+		 * Applies while the ToolItem is pressed.
+		 */
+		:pressed 
+		/**
+		 * Applies while the ToolItem is selected (CHECK of RADIO style).
+		 */
+		:selected 
 	}
 	ToolItem-Separator {
 		/**
@@ -2393,6 +3136,22 @@ package rap {
 		 * Border for the line separating the dropDown-icon
 		 */ 
 		border <prop-border>;
+		/**
+		 * Applies to disabled tool items.
+		 */
+		:disabled 
+		/**
+		 * Applies on mouse over.
+		 */
+		:hover 
+		/**
+		 * Applies while the ToolItem is pressed.
+		 */
+		:pressed 
+		/**
+		 * Applies while the ToolItem is selected (CHECK of RADIO style).
+		 */
+		:selected 
 	}
 	ToolTip {
 		/**
@@ -2491,6 +3250,18 @@ package rap {
 		 * Font for trees.
 		 */
 		font <prop-font>;
+		/**
+		 * Applies to disabled trees.
+		 */
+		:disabled 
+		/**
+		 * Applies to trees with gridlines.
+		 */
+		:linesvisible 
+		/**
+		 * Applies to a tree with a row template.
+		 */
+		:rowtemplate 
 	}
 	TreeItem {
 		/**
@@ -2513,6 +3284,34 @@ package rap {
 		 * Shadow for item text.
 		 */ 
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to the items of a disabled tree.
+		 */
+		:disabled 
+		/**
+		 * Applies when the tree item has an even visible index
+		 */
+		:even 
+		/**
+		 * Mouse over state.
+		 */
+		:hover 
+		/**
+		 * Applies to items of a tree with gridlines.
+		 */
+		:linesvisible 
+		/**
+		 * Applies to the items of a tree with a row template.
+		 */
+		:rowtemplate 
+		/**
+		 * When the tree item is selected
+		 */
+		:selected 
+		/**
+		 * When the focus is not on the tree
+		 */
+		:unfocused 
 	}
 	Tree-RowOverlay {
 		/**
@@ -2527,6 +3326,34 @@ package rap {
 		 * Tree item text color
 		 */
 		color <prop-color>;
+		/**
+		 * Applies to the items of a disabled tree.
+		 */
+		:disabled 
+		/**
+		 * Applies when the tree item has an even index
+		 */
+		:even 
+		/**
+		 * Applies while the user hovers over the tree item.
+		 */
+		:hover 
+		/**
+		 * Applies to the items of a tree with gridlines.
+		 */
+		:linesvisible 
+		/**
+		 * Applies to the items of a tree with a row template.
+		 */
+		:rowtemplate 
+		/**
+		 * Applies when tree item is selected.
+		 */
+		:selected 
+		/**
+		 * Applies to items on unfocused tree.
+		 */
+		:unfocused 
 	}
 	TreeColumn {
 		/**
@@ -2557,12 +3384,32 @@ package rap {
 		 * Shadow for item text.
 		 */
 		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to column headers of a disabled tree.
+		 */
+		:disabled 
+		/**
+		 * Mouse over state
+		 */
+		:hover 
 	}
 	TreeColumn-SortIndicator {
 		/**
 		 * Indicator image for tree sorting (up/down)
 		 */
 		background-image <prop-background-image>;
+		/**
+		 * Applies when the tree is disabled.
+		 */
+		:disabled 
+		/**
+		 * On sorting down
+		 */
+		:down 
+		/**
+		 * On sorting up
+		 */
+		:up 
 	}
 	Tree-Cell {
 		/**
@@ -2579,6 +3426,22 @@ package rap {
 		 * Grid line color when linesVisible is true
 		 */
 		color <prop-color>;
+		/**
+		 *  Applies for grid lines in header.
+		 */
+		:header 
+		/**
+		 * Applies for horizontal grid lines.
+		 */
+		:horizontal 
+		/**
+		 * Applies for grid lines in a tree with a row template
+		 */
+		:rowtemplate 
+		/**
+		 * Applies for vertical grid lines.
+		 */
+		:vertical 
 	}
 	Tree-Checkbox {
 		/**
@@ -2589,6 +3452,18 @@ package rap {
 		 * Space around the check boxes
 		 */
 		margin <prop-margin>;
+		/**
+		 * When tree checkbox is checked
+		 */
+		:checked 
+		/**
+		 * When tree checkbox is grayed
+		 */
+		:grayed 
+		/**
+		 * Applies while the user hovers over a tree check box.
+		 */
+		:hover 
 	}
 	Tree-Indent {
 		/**
@@ -2599,6 +3474,30 @@ package rap {
 		 *  The indention-width of one level. This property can not be influenced by the states of the element. 
 		 */
 		width <prop-width>;
+		/**
+		 *  Used for the final level if the item has children.
+		 */
+		:collapsed 
+		/**
+		 * Used for the final level if the item is expanded
+		 */
+		:expanded 
+		/**
+		 * Used for the final level if the item has no previous sibling.
+		 */
+		:first 
+		/**
+		 * Mouse over state. Can not be used together with line.
+		 */
+		:hover 
+		/**
+		 * Used for the final level if the item has no next sibling.
+		 */
+		:last 
+		/**
+		 *  Indicates that the level continues after this item. Never used for the final level and therefore never combined with the other states. 
+		 */
+		:line 
 	}
 	Display {
 		/**
@@ -2710,6 +3609,22 @@ package rap {
 		 * Background image used to display the pointer.
 		 */
 		background-image <prop-background-image>;
+		/**
+		 * On pointing down
+		 */
+		:down 
+		/**
+		 * On pointing left
+		 */
+		:left 
+		/**
+		 * On pointing right
+		 */
+		:right 
+		/**
+		 * On pointing up
+		 */
+		:up 
 	}
 	SystemMessage-DisplayOverlay {
 		/**
