@@ -1,0 +1,2724 @@
+package rap {
+	string = @STRING;
+	
+	/**
+	 *  Defines one or more animated effects.
+	 */
+	prop-animation = [ <animation-part> [, <animation-part>]* ] | none;
+	animation-part = <animation-name> <animation-duration> <animation-timing-function>; 
+	/**
+	 * <p>
+	 * References the name of an effect the widget supports. (See the animation-description of the individual widgets.) Unsupported effects will be ignored. (However the effect might be supported in the future and then not be ignored anymore.) If the given effects contradict each other (e.g. fadeIn and slideIn), the widget may use either one.
+	 * </p>
+	 * <p>
+	 * Currently existing effects:
+	 * <ul>
+	 * <li><b>hoverIn, hoverOut: </b>Animates the transition of the background when the mouse is moved over (hover-in) or leaves (hover-out) the widget. Requires that the pseudo class hover is used to define the alternate background. The effect only works between two background colors or two gradients. The gradients should have the same number of colors. Other changes like the border or text-color are currently not animated. </li>
+	 * <li><b>fadeIn, fadeOut: </b>Animates the emergence (fadeIn) or disappearance (fadeOut) of a widget by gradually changing its opacity.</li>
+	 * <li><b>slideIn, slideOut: </b>Animates the emergence (slideIn) or disappearance (slideOut) of a widget by gradually changing its height.</li>
+	 * <li><b>flyInTop, flyInRight, flyInBottom, flyInLeft, flyOutTop, flyOutRight, flyOutBottom, flyOutLeft: </b>Animates the emergence (flyIn) or disappearance (flyOut) of a widget by gradually changing its origin point until it reaches the target coordinates. </li>
+	 * </ul>
+	 * </p>
+	 */
+	animation-name = [hoverIn | hoverOut | fadeIn | fadeOut | slideIn | slideOut | flyInTop | flyInRight | flyInBottom | flyInLeft | flyOutTop | flyOutRight | flyOutBottom | flyOutLeft];
+	/**
+	 * The duration of the effect in seconds or milliseconds. 
+	 */
+	animation-duration = @NUM ~ [s|ms];
+	/**
+	 * Describes how the animation progresses over time. 
+	 */
+	animation-timing-function = [ease | linear | ease-in | ease-out | ease-in-out];
+	/**
+	 * Defines the color used as the background of the element: 
+	 */
+	prop-background-color = <named-color> | <hex-color> | <rgb-color> | <rgba-color> | transparent;
+	
+	/**
+	 * Defines either an image or a color-gradient to cover the background of a widget. May also be none, in this case background-color will be used. 
+	 */
+	prop-background-image = <image-url> | <color-gradient> | none;
+	
+	/**
+	 * Defines four dimensions, in the order of top right bottom left. 
+	 * <ul>
+	 * <li>When only one value is given, it is used for all four dimension. </li>
+	 * <li>When two values are given, the first is used for top and bottom, the second for left and right.</li>
+	 * <li>When three values are given, the first value is used for top, the second for left and right, and the third for bottom. </li>
+	 * </ul>
+	 */
+	box-dimension = [ <dimension> | <dimension> <dimension> | <dimension> <dimension> <dimension> <dimension>];
+	
+	prop-border = <border-width> <border-style> <prop-border-color>;
+	/**
+	 * <p>
+	 * One of the following values: solid, dotted, dashed, hidden, double, inset, outset, groove, ridge, none.
+	 * Defaults to solid.
+	 * </p>
+	 * <p>
+	 * Note that if border-radius of the same widget has a value larger than 0px, any border-style other than none or hidden is interpreted as solid.
+	 * </p> 
+	 */
+	border-width = <dimension>; 
+	border-style = [solid | dotted | dashed | hidden | double | inset | outset | groove | ridge | none];
+	/**
+	 * Defines the four radii of a rounded border. 
+	 */
+	prop-border-radius = <box-dimension>;
+	prop-border-color = <named-color> | <hex-color> | <rgb-color> | transparent;
+	
+	prop-border-bottom = <prop-border>;
+	prop-border-left = <prop-border>;
+	prop-background-gradient-color = <named-color> | <hex-color> | <rgb-color>;
+	
+	/**
+	 * Defines only the color of the upper border.
+	 */
+	prop-border-top-color = <prop-border-color>;
+	/**
+	 * Defines only the color of the lower border.
+	 */
+	prop-border-bottom-color = <prop-border-color>;
+	/**
+	 * Used to define the shadow that is drawn behind the widget. 
+	 * <ul>
+	 * <li>The first value defines the horizontal offset of the shadow. May be negative.</li>
+	 * <li>The second value defines the vertical offset of the shadow. May be negative.</li>
+	 * <li>The optional third value defines the radius of the blur effect. Negative values are not allowed. The default value is 0px.</li>
+	 * <li>The optional fourth value defines the spread of the shadow. It is currently not supported and therefore must be 0px. The default value is 0px.</li>
+	 * <li>The final value defines the color of the shadow. </li>
+	 * </ul>
+	 */
+	prop-box-shadow = <shadow> | none;
+	
+	shadow = <dimension> <dimension> [<dimension> [<dimension>]?]? <shadow-color>;
+	
+	shadow-color = <named-color> | <hex-color> | <rgb-color> | <rgba-color>;
+	
+	/**
+	 * A non-negative integer with px as unit. May be zero. 
+	 */
+	dimension = @NUM ~ px;
+	
+	/**
+	 * <p>
+	 * Format: gradient(, followed by a list of comma-separated arguments, followed by ).
+	 * </p>
+	 * <p>
+	 * The first three arguments define the type and direction of the gradient. RAP currently only supports linear vertical gradients from the top to the bottom and linear vertical gradients from left to right. Therefore these arguments have to be either exactly "linear, left top, left bottom" or exactly "linear, left top, right top". Any other arguments will produce an error.
+	 * </p>
+	 * <p>
+	 * After this, the colors are defined. At least two colors have to be given, using from( COLOR ) and to( COLOR ). Between these two, any number of colors may be defined using color-stop( POSITION, COLOR ).
+	 * </p>
+	 * <p>
+	 * POSITION is a ascending percentage value.<br />
+	 * COLOR is &lt;named-color&gt; | &lt;hex-color&gt; | &lt;rgb-color&gt;.
+	 * </p> 
+	 */
+	color-gradient = gradient( [ <gradient-type1> | <gradient-type2> ], <gradient-from> [ , <gradient-stop> ]*, <gradient-to> );
+	
+	gradient-from = from( [<named-color> | <hex-color> | <rgb-color>]);
+	gradient-to = to( [<named-color> | <hex-color> | <rgb-color>]);
+	gradient-stop = color-stop(<percentage>, [<named-color> | <hex-color> | <rgb-color> ]);
+	gradient-type1 = linear, left top, left bottom;
+	gradient-type2 = linear, left top, right top;
+	
+	/**
+	 * The format in hexadecimal notation is a # immediately followed by either three or six hexadecimal characters. The three-digit RGB notation (#rgb) is converted into six-digit form (#rrggbb) by replicating digits, not by adding zeros. 
+	 */
+	hex-color = $#[0123456789ABCDEFabcdef]{6}$ | $#[0123456789ABCDEFabcdef]{3}$;	
+	
+	/**
+	 * Supported image-formats are jpeg, gif and png. The path is relative to the root of the bundle. 
+	 */
+	image-url = @URL;
+	
+	named-color = [black, gray, silver, white, maroon, red, purple, fuchsia, green, lime, navy, blue, olive, yellow, teal, aqua];
+	
+	percentage = @NUM ~ %;
+	
+	/**
+	 * The format in the rgb notation is rgb(, followed by a comma-separated list of three numerical values (either integer or percentage), followed by ). The integer value 255 corresponds to 100%. 
+	 */
+	rgb-color = rgb(@INT(0->255), @INT(0->255), @INT(0->255) | <percentage>, <percentage>, <percentage>);
+	
+	/**
+	 * Like the <rgb-color> notation, but with one more parameter for opacity as used in the opacity attribute.
+	 */	
+	rgba-color = rgba(@INT(0->255), @INT(0->255), @INT(0->255), @NUM(.0->1.0) | <percentage>, <percentage>, <percentage>, @NUM(.0->1.0));
+	
+	/**
+	 * Used to define the shadow that is drawn behind the widget text. Note: Internet Explorer does not support text shadow.
+	 * <ul>
+	 * <li>The first value defines the horizontal offset of the shadow. May be negative.</li>
+	 * <li>The second value defines the vertical offset of the shadow. May be negative.</li>
+	 * <li>The optional third value defines the radius of the blur effect. Negative values are not allowed. The default value is 0px.</li>
+	 * <li>The final value defines the color of the shadow. </li>
+	 * </ul> 
+	 */
+	prop-text-shadow = [<dimension> <dimension> [<dimension>]? <shadow-color> ] | none;
+	 
+	/**
+	 * The color used for foreground-elements, e.g. Text.
+	 */
+	prop-color = <named-color> | <hex-color> | <rgb-color> | inherit;
+	
+	/**
+	 * Defines a the form of the mouse pointer over a certain widget.
+	 */	
+	prop-cursor = <cursor-type> | <image-url>;
+	
+	cursor-type = [default | wait | crosshair | help | move | text | pointer | e-resize | n-resize | w-resize | s-resize | ne-resize | se-resize | nw-resize | sw-resize | col-resize | row-resize | progress | not-allowed | no-drop];
+	
+	prop-font = [<font-style>]? [<font-weight>]? <font-size> <font-family>;
+	
+	font-style = normal | italic;
+	
+	font-weight = normal | bold;
+	
+	/**
+	 * Height of the text in pixels.
+	 */
+	font-size = <dimension>;
+	
+	/**
+	 * <p>
+	 * Name of the font that should be used. Is ignored if the font is not available on the client-system.
+	 * Several comma-seperated values can be given. The order is relevant, as the first available font will be used.
+	 * Font names containing any white spaces must be quoted.
+	 * </p>
+	 * <p>
+	 * As a fallback mechanism, one of the following generic fonts should be given as the last value: serif, sans-serif, cursive, fantasy, monospace.
+	 * </p>
+	 * <p>
+	 * For the color of the text, the color-property is used. Effects can be added using text-decoration.
+	 * </p> 
+	 */
+	font-family = <string> | serif | sans-serif | cursive | fantasy | monospace; 
+	
+	/**
+	 * A dimension that defines the height of certain parts of a widget.
+	 */
+	prop-height = <dimension>;
+	/**
+	 * Defines the distance between the element and its surroundings.
+	 */
+	prop-margin = <box-dimension>;
+	/**
+	 *  A rational number between (and including) 0 and 1 without a unit. 
+	 */
+	prop-opacity = @NUM(.0->1.0);
+	
+	/**
+	 * Defines the distance between the elements border and its content.
+	 */
+	prop-padding = <box-dimension>;
+	/**
+	 * The font list returned by Display#getFontList().
+	 */
+	prop-rwt-fontlist = <prop-font> [,<prop-font>]*;
+	/**
+	 * Defines an RWT system image.
+	 */
+	prop-rwt-error-image = <image-url>;
+	/**
+	 * Defines an RWT system image.
+	 */
+	prop-rwt-information-image = <image-url>;
+	/**
+	 * Defines an RWT system image.
+	 */
+	prop-rwt-working-image = <image-url>;
+	/**
+	 * Defines an RWT system image. 
+	 */
+	prop-rwt-question-image = <image-url>;
+	/**
+	 * Defines an RWT system image.
+	 */
+	prop-rwt-warning-image = <image-url>;
+	/**
+	 * Defines an RWT system color. 
+	 */
+	prop-rwt-shadow-color = <named-color> | <hex-color> | <rgb-color>;
+	/**
+	 * Defines an RWT system color. 
+	 */
+	prop-rwt-highlight-color = <named-color> | <hex-color> | <rgb-color>;
+	/**
+	 * Defines an RWT system color. 
+	 */
+	prop-rwt-darkshadow-color = <named-color> | <hex-color> | <rgb-color>;
+	/**
+	 * Defines an RWT system color. 
+	 */
+	prop-rwt-lightshadow-color = <named-color> | <hex-color> | <rgb-color>;
+	/**
+	 * Defines an RWT system color. 
+	 */
+	prop-rwt-thinborder-color = <named-color> | <hex-color> | <rgb-color>;
+	/**
+	 * Defines an RWT system color. 
+	 */
+	prop-rwt-selectionmarker-color = <named-color> | <hex-color> | <rgb-color>;
+	/**
+	 * Defines an RWT system color. 
+	 */
+	prop-rwt-infobackground-color = <named-color> | <hex-color> | <rgb-color>;
+	/**
+	 * A dimension that defines the distance between certain parts of a widget.
+	 */
+	prop-spacing = <dimension>;	
+	/**
+	 * Additional decorative effects to render a text with. 
+	 */
+	prop-text-decoration = underline | overline | line-through | none;
+	/**
+	 * A dimension that defines the width of certain parts of a widget.
+	 */
+	prop-width = <dimension>;
+	
+	Browser {
+		/**
+		 *  The border that is drawn around a Browser. 
+		 */
+		border <prop-border>;
+	}
+	Button {
+		/**
+		 *  Supports animations-types "hoverIn" and "hoverOut". Others are ignored. 
+		 */
+		animation <prop-animation>;
+		/**
+		 * Background color for buttons.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image for buttons.
+		 */
+		background-image <prop-background-image>;
+		// background-position <prop-background-position>;
+		// background-repeat <prop-background-repeat>
+		/**
+		 * Border for buttons.
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * A shadow effect for button.
+		 */
+		box-shadow <prop-box-shadow>;
+		/**
+		 * Text color for buttons.
+		 */
+		color <prop-color>;
+		/**
+		 * Control's cursor.
+		 */
+		cursor <prop-cursor>;
+		/**
+		 * Font for button text.
+		 */
+		font <prop-font>;
+		/**
+		 * The opacity of the button. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+		/**
+		 * Padding (inner distance) for buttons.
+		 */
+		padding <prop-padding>;
+		/**
+		 * Space between text and image.
+		 */
+		spacing <prop-spacing>;
+		/**
+		 * Decoration for button text.
+		 */
+		text-decoration <prop-text-decoration>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies for shell default button.
+		 */
+		:default
+		/**
+		 * Applies for disabled buttons. 
+		 */
+		:disabled 
+		/**
+		 * Applies to focused buttons.
+		 */
+		:focused
+		/**
+		 * Applies while the user hovers over a button.
+		 */ 
+		:hover
+		/**
+		 * Applies while a button is pressed.
+		 */
+		:pressed
+		/**
+		 * Applies for selected TOGGLE, CHECK and RADIO buttons.
+		 */ 
+		:selected 
+	}
+	Button-CheckIcon {
+		/**
+		 * Icon image of the check box.
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Applies when the button is disabled.
+		 */
+		:disabled 
+		/**
+		 * Applies when the button is focused.
+		 */
+		:focused 
+		/**
+		 * Applies when the check box is grayed.
+		 */
+		:grayed 
+		/**
+		 * Applies while the user hovers over the check box.
+		 */
+		:hover 
+		/**
+		 * Applies for checked check boxes.
+		 */
+		:selected 
+	}
+	Button-RadioIcon {
+		/**
+		 * Icon image of the radio button.
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Applies when the button is disabled.
+		 */ 
+		:disabled 
+		/**
+		 * Applies when the button is focused.
+		 */
+		:focused  
+		/**
+		 * Applies while the user hovers over the radio button.
+		 */
+		:hover 
+		/**
+		 * Applies for selected radio buttons.
+		 */
+		:selected 
+	}
+	Button-ArrowIcon {
+		/**
+		 * Icon image of the arrow button.
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Applies when the button is disabled.
+		 */
+		:disabled 
+		/**
+		 * Applies while the user hovers over the arrow button.
+		 */
+		:hover 
+	}
+	Button-FocusIndicator {
+		/**
+		 * The fill-color of the frame.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  The border of the frame. 3D-styles inset, outset, etc are not supported. 
+		 */
+		border <prop-border>;
+		/**
+		 *  The margin between the buttons border and the frame. Only used if padding is set to "0px". 
+		 */
+		margin <prop-margin>;
+		/**
+		 * The opacity of the indicator. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+		/**
+		 *  The padding between the frame and the buttons text. If this is set to "0px", margin will be used to layout the FocusIndicator. 
+		 */
+		padding <prop-padding>;
+	}
+	CCombo {
+		/**
+		 *  The background color used for the text field and the drop-down list of a CCombo. 
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background gradient for ccombo text field. 
+		 */
+		background-image <prop-background-image>;
+		/**
+		 *  The border that is drawn around a CCombo. 
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * A shadow effect for ccombo text field.
+		 */
+		box-shadow <prop-box-shadow>;
+		/**
+		 *  The text color used for the text field and the drop-down list of a CCombo. 
+		 */
+		color <prop-color>;
+		/**
+		 *  The font used for the text field and the drop-down list of a CCombo. 
+		 */
+		font <prop-font>;
+		/**
+		 *  Shadow for text. 
+		 */
+		text-shadow <prop-text-shadow>;
+		/**
+		 * Applies to disabled CCombos.
+		 */
+		:disabled  
+		/**
+		 * Applies to focused CCombos.
+		 */
+		:focused 
+	}
+	CCombo-Button {
+		/**
+		 *  The background color of the drop-down button of the CCombo. 
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image or gradient for CCombo drop-down button. 
+		 */
+		background-image <prop-background-image>;
+		/**
+		 *  The border of the drop-down button of the CCombo. 
+		 */
+		border <prop-border>;
+		/**
+		 *  The left side border of the CCombo drop-down button. 
+		 */
+		border-left <prop-border-left>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * CCombo button cursor. 
+		 */
+		cursor <prop-cursor>;
+		/**
+		 *  The width of the drop-down button of the CCombo. 
+		 */
+		width <prop-width>;
+		/**
+		 * Applies when the button is disabled.
+		 */
+		:disabled 
+		/**
+		 * Applies while the user hovers over the CCombo button.
+		 */
+		:hover 
+		/**
+		 * Applies while a button is pressed.
+		 */
+		:pressed 
+	}
+	CCombo-Button-Icon {
+		/**
+		 *  The icon for the CCombo drop-down button.  
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Applies when the button is disabled.
+		 */
+		:disabled 
+		/**
+		 * Applies while the user hovers over the CCombo button.
+		 */
+		:hover 
+	}
+	CCombo-Field {
+		/**
+		 *  Padding (inner distance) for ccombo text field. 
+		 */
+		 padding <prop-padding>;
+	}
+	CCombo-List {
+		/**
+		 *  The border of the list of the CCombo. 
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>; 
+		/**
+		 * The shadow behind the combos list.
+		 */
+		box-shadow <prop-box-shadow>;
+	}
+	CCombo-FocusIndicator {
+		/**
+		 * The fill-color of the frame.
+		 */
+		 background-color <prop-background-color>; 
+		/**
+		 *  The border of the frame. 3D-styles inset, outset, etc are not supported. 
+		 */
+		 border <prop-border>;
+		/**
+		 *  The margin between the ccombos border and the frame. 
+		 */
+		 margin <prop-margin>;
+		/**
+		 * The opacity of the indicator. A value between 0 and 1.
+		 */
+		 opacity <prop-opacity>;
+	}
+	CLabel {
+		/**
+		 * Background color for clabels.
+		 */
+		 background-color <prop-background-color>; 
+		/**
+		 * Background image or gradient for clabels.
+		 */
+		 background-image <prop-background-image>;
+//		 background-position <prop-background-position>;
+//		 background-repeat <prop-background-repeat>;
+		/**
+		 * Border for clabels.
+		 */
+		 border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		 border-radius <prop-border-radius>;
+		/**
+		 * Text color for clabels.
+		 */
+		 color <prop-color>;
+		/**
+		 * Control's cursor.
+		 */
+		 cursor <prop-cursor>;
+		/**
+		 * Text font for clabels.
+		 */
+		 font <prop-font>;
+		/**
+		 * The opacity of the CLabel. A value between 0 and 1.
+		 */
+		 opacity <prop-opacity>;
+		/**
+		 * Padding for clabels.
+		 */
+		 padding <prop-padding>;
+		/**
+		 * Space between text and image.
+		 */
+		 spacing <prop-spacing>;
+		/**
+		 * Shadow for text.
+		 */
+		 text-shadow <prop-text-shadow>;
+		 /**
+		  * Applies to disabled clabels.
+		  */
+		 :disabled
+		 /**
+		  * Applies to widgets while the cursor hovers over them.
+		  */
+		 :hover  
+	}
+	CTabFolder {
+		/**
+		 * CTabFolder border color.
+		 */
+		 border-color <prop-border-color>;
+		 /**
+		  * CTabFolder border radius.
+		  */
+		 border-radius <prop-border-radius>;
+		 /**
+		  * Applies to items of a disabled CTabFolder.
+		  */
+		 :disabled 
+	}
+	CTabItem {
+		/**
+		 * Background color for the item tabs.
+		 */
+		 background-color <prop-background-color>;
+		/**
+		 * Background image or gradient for CTabItem.
+		 */
+		 background-image <prop-background-image>;
+		/**
+		 * Text color for the item tabs.
+		 */
+		 color <prop-color>;
+		/**
+		 * Font for the item tabs.
+		 */
+		 font <prop-font>;
+		/**
+		 * Padding for CTabItem
+		 */
+		 padding <prop-padding>;
+		/**
+		 * Spacing between text and image
+		 */
+		 spacing <prop-spacing>;
+		/**
+		 * Shadow for text.
+		 */
+		 text-shadow <prop-text-shadow>;
+		 /**
+		  * Applies to items of a disabled CTabFolder.
+		  */
+		 :disabled 
+		 /**
+		  * Applies to the selected item.
+		  */
+		 :selected 
+	}
+	CTabFolder-DropDownButton-Icon {
+		/**
+		 * The icon for the CTabFolder drop-down button. 
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Applies while the user hovers over the button.
+		 */
+		:hover 
+		/**
+		 * Applies while a button is pressed.
+		 */
+		:pressed 
+	}
+	Combo {
+		/**
+		 * The background color used for the text field and the drop-down list of a Combo. 
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background gradient for combo text field. 
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * The border that is drawn around a Combo. 
+		 */
+		border <prop-border>;
+		/**
+		 * Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * A shadow effect for combo text field.
+		 */
+		box-shadow <prop-box-shadow>;
+		/**
+		 * The text color used for the text field and the drop-down list of a Combo. 
+		 */
+		color <prop-color>;
+		/**
+		 * The font used for the text field and the drop-down list of a Combo. 
+		 */
+		font <prop-font>;
+		/**
+		 * Shadow for text. 
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	Combo-Button {
+		/**
+		 *  The background color of the drop-down button of the Combo. 
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image or gradient for combo drop-down button. 
+		 */
+		background-image <prop-background-image>;
+		/**
+		 *  The border of the drop-down button of the Combo. 
+		 */
+		border <prop-border>;
+		/**
+		 *  The left side border of the Combo drop-down button. 
+		 */
+		border-left <prop-border-left>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Combo button cursor.
+		 */
+		cursor <prop-cursor>;
+		/**
+		 *  The width of the drop-down button of the Combo. 
+		 */
+		width <prop-width>;
+	}
+	Combo-Button-Icon {
+		/**
+		 *  The icon for the Combo drop-down button. 
+		 */
+		background-image <prop-background-image>; 
+	}
+	Combo-Field {
+		/** 
+		 * Padding (inner distance) for combo text field. 
+		 */
+		padding <prop-padding>;
+	}
+	Combo-List {
+		/**
+		 *  The border of the list of the Combo. 
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>; 
+		/**
+		 * The shadow behind the combos list.
+		 */
+		box-shadow <prop-box-shadow>;
+	}
+	Combo-FocusIndicator {
+		/**
+		 * The fill-color of the frame.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  The border of the frame. 3D-styles inset, outset, etc are not supported. 
+		 */
+		border <prop-border>;
+		/**
+		 *  The margin between the combos border and the frame. 
+		 */
+		margin <prop-margin>;
+		/**
+		 * The opacity of the indicator. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+	}
+	Composite {
+		animation <prop-animation>;
+		background-color <prop-background-color>;
+		background-image <prop-background-image>;
+//		background-position <prop-background-position>;
+//		background-repeat <prop-background-repeat>;
+		border <prop-border>;
+		border-radius <prop-border-radius>;
+		box-shadow <prop-box-shadow>;
+		opacity <prop-opacity>;
+		padding <prop-padding>;
+	}
+	CoolBar {
+		/**
+		 * Background image for cool bar
+		 */
+		background-image <prop-background-image>;
+	}
+	CoolItem-Handle {
+		/**
+		 * The border of cool item handle.
+		 */
+		border <prop-border>;
+		/**
+		 * Width of cool item handle.
+		 */
+		width <prop-width>;
+	}
+	DateTime {
+		/**
+		 * Background color
+		 */
+		background-color <prop-background-color>; 
+		/**
+		 *  Background gradient for DateTime. Not applied to DateTime Calendar. 
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * DateTime border
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>; 
+		/**
+		 * Inner or outer shadow around the bounds of a DateTime widget.
+		 */
+		box-shadow <prop-box-shadow>;
+		/**
+		 * Text color for DateTime.
+		 */
+		color <prop-color>;
+		/**
+		 *  Text font for DateTime. Not applied to DateTime Calendar. 
+		 */
+		font <prop-font>;
+		/**
+		 * Padding for DateTime Date/Time.
+		 */
+		padding <prop-padding>; 
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>; 
+	}
+	DateTime-Field {
+		/**
+		 * Background color for DateTime fields
+		 */
+		background-color <prop-background-color>; 
+		/**
+		 * Text color for DateTime fields.
+		 */
+		color <prop-color>;
+		/**
+		 * Padding for DateTime Date/Time field part.
+		 */
+		padding <prop-padding>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	DateTime-Calendar-Day {
+		/**
+		 * Background color
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Text color
+		 */
+		color <prop-color>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	DateTime-Calendar-Navbar {
+		/**
+		 * Background color
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Calendar navigation bar background image or gradient
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Calendar navigation bar border
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Text color
+		 */
+		color <prop-color>;
+		/**
+		 *  Text font for the Calendar navigation bar. 
+		 */
+		font <prop-font>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	DateTime-Calendar-PreviousMonthButton {
+		/**
+		 * Background image for the Calendar previous month button. The size of the image should be 16 x 16 pixels. 
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Calendar previous month button cursor.
+		 */
+		cursor <prop-cursor>;
+	}
+	DateTime-Calendar-NextMonthButton {
+		/**
+		 *  Background image for the Calendar next month button. The size of the image should be 16 x 16 pixels. 
+		 */
+		background-image <prop-background-image>; 
+		/**
+		 * Calendar next month button cursor.
+		 */
+		cursor <prop-cursor>;
+	}
+	DateTime-Calendar-PreviousYearButton {
+		/**
+		 *  Background image for the Calendar previous year button. The size of the image should be 16 x 16 pixels. 
+		 */
+		background-image <prop-background-image>; 
+		/**
+		 * Calendar previous year button cursor.
+		 */
+		cursor <prop-cursor>;
+	}
+	DateTime-Calendar-NextYearButton {
+		/**
+		 *  Background image for the Calendar next year button. The size of the image should be 16 x 16 pixels. 
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Calendar next year button cursor.
+		 */
+		cursor <prop-cursor>;
+	}
+	DateTime-UpButton {
+		/**
+		 *  The background color of the DateTime Date/Time up button. 
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image or gradient for DateTime up button. 
+		 */
+		background-image <prop-background-image>;
+		/**
+		 *  The border of the DateTime Date/Time up button. 
+		 */
+		border <prop-border>;
+		/**
+		 *  The left side border of the DateTime Date/Time up button. 
+		 */
+		border-left <prop-border-left>; 
+		/** 
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * DateTime Date/Time up button cursor.
+		 */
+		cursor <prop-cursor>;
+		/**
+		 *  The width of the DateTime Date/Time up button. 
+		 */
+		width <prop-width>;
+	}
+	DateTime-UpButton-Icon {
+		/**
+		 * The icon for DateTime up button.
+		 */
+		background-image <prop-background-image>;
+	}
+	DateTime-DownButton {
+		/**
+		 *  The background color of the DateTime Date/Time down button. 
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image or gradient for DateTime down button. 
+		 */
+		background-image <prop-background-image>; 
+		/**
+		 *  The border of the DateTime Date/Time down button. 
+		 */
+		border <prop-border>;
+		/**
+		 *  The left side border of the DateTime Date/Time down button. 
+		 */
+		border-left <prop-border-left>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * DateTime Date/Time down button cursor.
+		 */
+		cursor <prop-cursor>;
+		/**
+		 *  The width of the DateTime Date/Time down button. 
+		 */
+		width <prop-width>;
+	}
+	DateTime-DownButton-Icon {
+		/**
+		 * The icon for DateTime down button.
+		 */
+		background-image <prop-background-image>; 
+	}
+	DateTime-DropDownButton {
+		/**
+		 *  The background color of the DateTime Date drop-down button. 
+		 */
+		background-color <prop-background-color>; 
+		/**
+		 *  Background image or gradient for DateTime drop-down button. 
+		 */
+		background-image <prop-background-image>;
+		/**
+		 *  The border of the DateTime Date drop-down button. 
+		 */
+		border <prop-border>;
+		/**
+		 *  The left side border of the DateTime Date drop-down button. 
+		 */
+		border-left <prop-border-left>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 *  DateTime Date drop-down button cursor.
+		 */
+		cursor <prop-cursor>;
+		/**
+		 *  The width of the DateTime Date drop-down button. 
+		 */
+		width <prop-width>;
+	}
+	DateTime-DropDownButton-Icon {
+		/**
+		 *  The icon for the DateTime drop-down button. 
+		 */
+		background-image <prop-background-image>;
+	}
+	DateTime-DropDownCalendar {
+		/**
+		 *  The border of the drop-down calendar. 
+		 */
+		border <prop-border>;
+	}
+	ExpandBar {
+		/**
+		 * ExpandBar border
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>; 
+		/**
+		 *  Text color for expand item boxes. Applied to the expand item header label. 
+		 */
+		color <prop-color>;
+		/**
+		 *  Font for expand item boxes. Applied to the expand item header label. 
+		 */
+		font <prop-font>;
+	}
+	ExpandItem {
+		/**
+		 * ExpandItem border
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>; 
+	}
+	ExpandItem-Header {
+		/**
+		 *  Background color for the expand item header. 
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image or gradient for the expand item header. 
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Expand item header border
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Expand item header cursor.
+		 */
+		cursor <prop-cursor>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	ExpandItem-Button {
+		/**
+		 *  Background image for the ExpandItem collapse/expand button. The size of the image should be 16 x 16 pixels. 
+		 */
+		 background-image <prop-background-image>;
+	}
+	FileUpload {
+		/**
+		 *  Supports animations-types "hoverIn" and "hoverOut". Others are ignored. 
+		 */
+		animation <prop-animation>; 
+		/**
+		 * Background color for FileUpload controls.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image for FileUpload controls.
+		 */
+		background-image <prop-background-image>;
+//		background-position <prop-background-position>;
+//		background-repeat <prop-background-repeat>;
+		/**
+		 * Border for FileUpload controls.
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Text color for FileUpload controls.
+		 */
+		color <prop-color>;
+		/**
+		 * Control's cursor.
+		 */
+		cursor <prop-cursor>;
+		/**
+		 * Font for FileUpload controls text.
+		 */
+		font <prop-font>;
+		/**
+		 * The opacity of the FileUpload controls. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+		/**
+		 * Padding (inner distance) for FileUpload controls.
+		 */
+		padding <prop-padding>;
+		/**
+		 * Space between text and image.
+		 */
+		spacing <prop-spacing>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	FileUpload-FocusIndicator {
+		/**
+		 * The fill-color of the frame.
+		 */
+		background-color <prop-background-color>; 
+		/**
+		 *  The border of the frame. 3D-styles inset, outset, etc are not supported. 
+		 */
+		border <prop-border>;
+		/**
+		 *  The margin between the FileUpload control border and the frame. Only used if padding is set to "0px". 
+		 */
+		margin <prop-margin>;
+		/**
+		 * The opacity of the indicator. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+		/**
+		 *  The padding between the frame and the FileUpload control text. If this is set to "0px", margin will be used to layout the FocusIndicator. 
+		 */
+		padding <prop-padding>;
+	}
+	Group {
+		/**
+		 * Background color for group boxes.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Border for group boxes.
+		 */ 
+		border <prop-border>;
+		/**
+		 * Text color for group boxes.
+		 */
+		color <prop-color>;
+		/**
+		 * Font for group boxes. Applied to the group box label.
+		 */
+		font <prop-font>;
+	}
+	Group-Frame {
+		/**
+		 * Border for group box frames.
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>; 
+		/**
+		 * Margin for group box frames (outer space around the frame).
+		 */
+		margin <prop-margin>;
+		/**
+		 * Padding for group box frames (inner distance between frame border and content).
+		 */
+		padding <prop-padding>;
+	}
+	Group-Label {
+		/**
+		 * Background color for group box label (override the color set by Group#setBackgroundColor()).
+		 */
+		background-color <prop-background-color>; 
+		/**
+		 * Border for group box label.
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Text color for group box label (override the color set by Group#setForegroundColor()).
+		 */
+		color <prop-color>;
+		/**
+		 * Margin for group box labels (offset of the group box label).
+		 */
+		margin <prop-margin>;
+		/**
+		 * Padding for group box labels (space around the label text).
+		 */
+		padding <prop-padding>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	Label {
+		/**
+		 * Background color for labels.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image or gradient for labels.
+		 */ 
+		background-image <prop-background-image>;
+//		background-position <prop-background-position>;
+//		background-repeat <prop-background-repeat>;
+		/**
+		 * Border for labels.
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Text color for labels.
+		 */
+		color <prop-color>;
+		/**
+		 * Control's cursor.
+		 */
+		cursor <prop-cursor>;
+		/**
+		 * Text font for labels.
+		 */
+		font <prop-font>;
+		/**
+		 * The opacity of the label. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+		/**
+		 * Decoration for label text.
+		 */
+		text-decoration <prop-text-decoration>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	Label-SeparatorLine {
+		/**
+		 * Background color for the separator line.
+		 */
+		background-color <prop-background-color>; 
+		/**
+		 * Background image or gradient for the separator line. 
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Border for separator line.
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 *  Represents the width of the separator line if it's vertical or the height, if it's horizontal. 
+		 */
+		width <prop-width>;
+	}
+	Link {
+		/**
+		 * Background color for links.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image or gradient for links.
+		 */
+		background-image <prop-background-image>;
+//		background-position <prop-background-position>;
+//		background-repeat <prop-background-repeat>;
+		/**
+		 * Border for links.
+		 */
+		border <prop-border>;
+		/**
+		 * Text color for links.
+		 */
+		color <prop-color>;
+		/**
+		 * Font for link texts.
+		 */
+		font <prop-font>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	Link-Hyperlink {
+		/**
+		 * Text color for hyperlinks in Link widget.
+		 */
+		color <prop-color>; 
+		/**
+		 * Decoration for hyperlinks text.
+		 */
+		text-decoration <prop-text-decoration>; 
+		/**
+		 * Shadow for hyperlinks in Link widget.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	List {
+		/**
+		 * Background color for lists.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Border for lists.
+		 */ 
+		border <prop-border>;
+		/**
+		 * Text color lists.
+		 */
+		color <prop-color>;
+		/**
+		 * Font for lists.
+		 */
+		font <prop-font>;
+	}
+	List-Item {
+		/**
+		 * Background color for list items.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image or gradient for list items.
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Text color for list items.
+		 */
+		color <prop-color>;
+		/**
+		 * Padding for the list items.
+		 */
+		padding <prop-padding>;
+		/**
+		 * Shadow for items text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	Menu {
+		/**
+		 *  Supports animations-types "slideIn" and "slideOut". Others are ignored. 
+		 */
+		animation <prop-animation>; 
+		/**
+		 * Background color
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image or gradient
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Menu border
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * The shadow behind the menu.
+		 */
+		box-shadow <prop-box-shadow>;
+		/**
+		 * Menu text color
+		 */
+		color <prop-color>;
+		/**
+		 * Menu font
+		 */
+		font <prop-font>;
+		/**
+		 * The opacity of the menu. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+		/**
+		 * Space between border and text / image
+		 */
+		padding <prop-padding>;
+	}
+	MenuItem {
+		/**
+		 * Background color
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Menu item text color
+		 */
+		color <prop-color>;
+		/**
+		 * The opacity of the item. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+		/**
+		 * Padding (inner distance) for menu items.
+		 */
+		padding <prop-padding>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	MenuItem-CheckIcon {
+		/**
+		 *  The icon image. The maximum size of the image should be 16 x 16 pixels. 
+		 */
+		background-image <prop-background-image>;
+	}
+	MenuItem-RadioIcon {
+		/**
+		 *  The icon image. The maximum size of the image should be 16 x 16 pixels. 
+		 */
+		background-image <prop-background-image>;
+	}
+	MenuItem-CascadeIcon {
+		/**
+		 *  The icon image. The maximum size of the image should be 16 x 16 pixels. 
+		 */
+		background-image <prop-background-image>;
+	}
+	ProgressBar {
+		/**
+		 * Background color for progress bars
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image for progress bars. Gradient supported.
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Border for progress bars.
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 *  Represents the width of the progress bar if it's vertical or the height, if it's horizontal. 
+		 */
+		width <prop-width>;
+	}
+	ProgressBar-Indicator {
+		/**
+		 * Background color for progress indicator
+		 */
+		background-color <prop-background-color>; 
+		/**
+		 * Background image for progress indicator. Gradient supported.
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * The separator-line at the right/top of the indicator. Supports only solid borders
+		 */
+		border <prop-border>;
+		/**
+		 * The opacity of the indicator. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+	}
+	Sash {
+		/**
+		 * Background color for sash.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image for sash.
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * The border around the sash.
+		 */
+		border <prop-border>;
+	}
+	Sash-Handle {
+		/**
+		 * Background image for sash handle
+		 */
+		 background-image <prop-background-image>;
+	}
+	Scale {
+		/**
+		 * Background color for scale
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Scale border
+		 */ 
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+	}
+	Scale-Thumb {
+		/**
+		 * Background color for scale thumb.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Thumb border
+		 */ 
+		border <prop-border>;
+		/**
+		 * Thumb border radius
+		 */
+		border-radius <prop-border-radius>;
+	}
+	ScrollBar {
+		/**
+		 * Background color for scrollbars.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image or gradient for scrollbars. 
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Border for scrollbars.
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 *  Represents the width of the scrollbar if it's vertical or the height, if it's horizontal. 
+		 */
+		width <prop-width>;
+	}
+	ScrollBar-Thumb {
+		/**
+		 * Background color for scrollbar thumb
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image or gradient for scrollbar movable thumb. 
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Thumb border
+		 */
+		border <prop-border>;
+		/**
+		 * Thumb border radius
+		 */
+		border-radius <prop-border-radius>;
+//		min-height <prop-min-height>;
+	}
+	ScrollBar-Thumb-Icon {
+		/**
+		 *  The icon for the scrollbar down button. 
+		 */
+		 background-image <prop-background-image>;
+	}
+	ScrollBar-DownButton {
+		/**
+		 * Background color for min button
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image or gradient for scrollbar down button. 
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Down button border
+		 */
+		border <prop-border>;
+		/**
+		 * Down button border radius
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Scrollbar down button cursor.
+		 */
+		cursor <prop-cursor>;
+	}
+	ScrollBar-DownButton-Icon {
+		/**
+		 *  The icon for the scrollbar down button. 
+		 */
+		 background-image  <prop-background-image>;
+	}
+	ScrollBar-UpButton {
+		/**
+		 * Background color for up button
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image or gradient for scrollbar up button. 
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Up button border
+		 */
+		border <prop-border>;
+		/**
+		 * Up button border radius
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Scrollbar up button cursor.
+		 */
+		cursor <prop-cursor>;
+	}
+	ScrollBar-UpButton-Icon {
+		/**
+		 *  The icon for the scrollbar up button. 
+		 */
+		background-image <prop-background-image>;
+	}
+	Shell {
+		/**
+		 *  Animation that is triggered on emergence and disappearance of a Shell. Supported animation types are "flyInTop", "flyInBottom", "flyInRight", "flyInLeft", "flyOutTop", "flyOutBottom", "flyOutRight" and "flyOutLeft". 
+		 */
+		animation <prop-animation>; 
+		/**
+		 * Background color for shells.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image or gradient.
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Outer window border.
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * The shadow behind the shell.
+		 */
+		box-shadow <prop-box-shadow>;
+		/**
+		 * The opacity of the shell. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+		/**
+		 * Padding around the shell's client area.
+		 */
+		padding <prop-padding>;
+	}
+	Shell-Titlebar {
+		/**
+		 *  Background color for the title bar. Maps to system colors SWT.COLOR_TITLE_BACKGROUND and SWT.COLOR_TITLE_INACTIVE_BACKGROUND, respectively. 
+		 */
+		background-color <prop-background-color>; 
+		/**
+		 *  Second background color for the title bar (currently ignored). Maps to system colors SWT.COLOR_TITLE_BACKGROUND_GRADIENT and SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT, respectively. 
+		 */
+		background-gradient-color <prop-background-gradient-color>; 
+		/**
+		 * Background image for the title bar.
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Shell titlebar border.
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Text color for the title bar.
+		 */
+		color <prop-color>;
+		/**
+		 * Font for the title bar.
+		 */
+		font <prop-font>;
+		/**
+		 * Height of the title bar.
+		 */
+		height <prop-height>;
+		/**
+		 * Margin for the title bar.
+		 */
+		margin <prop-margin>;
+		/**
+		 * Padding for the title bar.
+		 */
+		padding <prop-padding>;
+		/**
+		 * Shadow for title bar text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	Shell-MinButton {
+		/**
+		 * Image for the minimize button.
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Margin for the minimize button.
+		 */ 
+		margin <prop-margin>;
+	}
+	Shell-MaxButton {
+		/**
+		 * Background image for the shell maximize/restore button.
+		 */
+		background-image <prop-background-image>; 
+		/**
+		 * Margin for the shell maximize/restore button.
+		 */
+		margin <prop-margin>;
+	}
+	Shell-CloseButton {
+		/**
+		 * Background image for the shell close button.
+		 */
+		background-image <prop-background-image>; 
+		/**
+		 * Margin for the shell close button.
+		 */
+		margin <prop-margin>;
+	}
+	Shell-DisplayOverlay {
+		/**
+		 *  Supports animations-types "fadeIn" and "fadeOut". Others are ignored. 
+		 */
+		animation <prop-animation>; 
+		/**
+		 * Background color for the overlay.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image for the overlay.
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * The opacity of the overlay. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+	}
+	Slider {
+		/**
+		 * Background color for slider
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Border for sliders.
+		 */ 
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+	}
+	Slider-Thumb {
+		/**
+		 * Background color for slider thumb
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image or gradient for slider movable thumb. 
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Thumb border
+		 */
+		border <prop-border>;
+		/**
+		 * Thumb border radius
+		 */
+		border-radius <prop-border-radius>;
+	}
+	Slider-DownButton {
+		/**
+		 * Background color for min button
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image, gradient or icon if not specified in Slider-DownButton-Icon for slider down button. 
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Down button border
+		 */
+		border <prop-border>;
+		/**
+		 * Down button border radius
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Slider down button cursor.
+		 */
+		cursor <prop-cursor>;
+		/**
+		 * Padding (inner distance) for Slider down button.
+		 */
+		padding <prop-padding>;
+	}
+	Slider-DownButton-Icon {
+		/**
+		 *  The icon for the Slider down button. 
+		 */
+		background-image <prop-background-image>;
+	}
+	Slider-UpButton {
+		/**
+		 * Background color for up button
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image, gradient or icon if not specified in Slider-UpButton-Icon for slider up button. 
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Up button border
+		 */
+		border <prop-border>;
+		/**
+		 * Up button border radius
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Slider up button cursor.
+		 */
+		cursor <prop-cursor>;
+		/**
+		 * Padding (inner distance) for Slider up button.
+		 */
+		padding <prop-padding>;
+	}
+	Slider-UpButton-Icon {
+		/**
+		 *  The icon for the Slider up button. 
+		 */
+		 background-image <prop-background-image>;
+	}
+	Spinner {
+		/**
+		 * Spinner background color
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background gradient for spinner. 
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Border for spinner text fields.
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * A shadow effect for spinner text field.
+		 */
+		box-shadow <prop-box-shadow>;
+		/**
+		 * Spinner foreground color
+		 */
+		color <prop-color>;
+		/**
+		 * Text font
+		 */
+		font <prop-font>;
+		/**
+		 * Padding for spinner.
+		 */
+		padding <prop-padding>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	Spinner-Field {
+		/**
+		 * Padding for spinner text fields.
+		 */
+		 padding <prop-padding>;
+	}
+	Spinner-UpButton {
+		/**
+		 * Background color of spinner up button.
+		 */
+		background-color <prop-background-color>; 
+		/**
+		 *  Background image or gradient for spinner up button. 
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Border for spinner up button.
+		 */
+		border <prop-border>;
+		/**
+		 * Left side border for spinner up button.
+		 */
+		border-left <prop-border-left>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Spinner up button cursor.
+		 */
+		cursor <prop-cursor>;
+		/**
+		 * Width of the spinner up button.
+		 */
+		width <prop-width>;
+	}
+	Spinner-UpButton-Icon {
+		/**
+		 * The icon for spinner up button.
+		 */
+		 background-image <prop-background-image>;
+	}
+	Spinner-DownButton {
+		/**
+		 * Background color of spinner down button.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image or gradient for spinner down button. 
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Border for spinner down button.
+		 */
+		border <prop-border>;
+		/**
+		 * Left side border for spinner down button.
+		 */
+		border-left <prop-border-left>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Spinner down button cursor.
+		 */
+		cursor <prop-cursor>;
+		/**
+		 * Width of the spinner down button.
+		 */
+		width <prop-width>;
+	}
+	Spinner-DownButton-Icon {
+		/**
+		 * The icon for spinner down button.
+		 */
+		 background-image <prop-background-image>;
+	}
+	TabFolder {
+		/**
+		 * Border for TabFolder.
+		 */
+		border <prop-border>; 
+		/**
+		 * Font for tab items text.
+		 */
+		font <prop-font>;
+	}
+	TabItem {
+		/**
+		 * Background color for tab folder headers.
+		 */
+		background-color <prop-background-color>; 
+		/**
+		 * Background image or gradient for tab folder headers.
+		 */
+		background-image <prop-background-image>;
+		/**
+		 *  The bottom border color. This color is used when the TabFolder style flag SWT.BOTTOM is set. 
+		 */
+		border-bottom-color <prop-border-bottom-color>;
+		/**
+		 *  The top border color. This color is used when the TabFolder style flag SWT.TOP is set. 
+		 */
+		border-top-color <prop-border-top-color>;
+		/**
+		 * Padding (inner distance) for tab items.
+		 */
+		padding <prop-padding>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	TabFolder-ContentContainer {
+		/**
+		 * Border for the content container.
+		 */
+		 border <prop-border>;
+	}
+	Table {
+		/**
+		 * Background color for tables.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image or gradient for table client area.
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * The border around the table including header.
+		 */
+		border <prop-border>;
+		/**
+		 * Text color for tables.
+		 */
+		color <prop-color>;
+		/**
+		 * Font for tables.
+		 */
+		font <prop-font>;
+	}
+	TableItem {
+		/**
+		 * Table item background color
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Tree item background image/gradient
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Table item text color
+		 */
+		color <prop-color>;
+		/**
+		 * Decoration for item text.
+		 */
+		text-decoration <prop-text-decoration>;
+		/**
+		 * Shadow for item text.
+		 */ 
+		text-shadow <prop-text-shadow>;
+	}
+	Table-RowOverlay {
+		/**
+		 * Table item background color. Supports rgba values
+		 */
+		background-color <prop-background-color>; 
+		/**
+		 * Tree item background image/gradient
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Table item text color
+		 */
+		color <prop-color>;
+	}
+	TableColumn {
+		/**
+		 * Background color for table column headers
+		 */
+		background-color <prop-background-color>; 
+		/**
+		 * Background image or gradient for TableColumn.
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Border for TableColumn bottom line.
+		 */
+		border-bottom <prop-border-bottom>;
+		/**
+		 * Text color for table column headers
+		 */
+		color <prop-color>;
+		/**
+		 * Font for table column headers
+		 */
+		font <prop-font>;
+		/**
+		 * Padding for table columns.
+		 */
+		padding <prop-padding>;
+		/**
+		 * Shadow for table columns.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	TableColumn-SortIndicator {
+		/**
+		 * Indicator image for table sorting (up/down)
+		 */
+		background-image  <prop-background-image>;
+	}
+	Table-Cell {
+		/**
+		 * Defines the padding (i.e. the inner distance between border and content) for a table cell.
+		 */
+		padding <prop-padding>; 
+		/**
+		 * Defines the spacing between image and text within a table cell.
+		 */
+		spacing <prop-spacing>;
+	}
+	Table-GridLine {
+		/**
+		 * Grid line color when linesVisible is true
+		 */
+		 color <prop-color>;
+	}
+	Table-Checkbox {
+		/**
+		 *  Background image for the table checkbox. The size of the image should be 13 x 13 pixels. 
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Space around the check boxes
+		 */ 
+		margin <prop-margin>;
+//		width <prop-width>; // deprecated
+	}
+	Text {
+		/**
+		 * Background color
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image or gradient for text widget. 
+		 */ 
+		background-image <prop-background-image>;
+//		background-position <prop-background-position>;
+//		background-repeat <prop-background-repeat>;
+		/**
+		 * Border for text fields. Also used for spinner widget.
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Inner or outer shadow around the bounds of a Text widget.
+		 */
+		box-shadow <prop-box-shadow>;
+		/**
+		 * Text color
+		 */
+		color <prop-color>;
+		/**
+		 * Text font
+		 */
+		font <prop-font>;
+		/**
+		 * Padding for single-line text fields. Also used for spinner.
+		 */
+		padding <prop-padding>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	Text-Message {
+		/**
+		 * Text message color
+		 */
+		color <prop-color>; 
+		/**
+		 * Shadow for message text.
+		 */
+		text-shadow <prop-text-shadow>; 
+	}
+	Text-Search-Icon {
+		/**
+		 * The image for the search icon.
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Defines the spacing between search icon and text field.
+		 */ 
+		spacing <prop-spacing>;
+	}
+	Text-Cancel-Icon {
+		/**
+		 * The image for the cancel icon.
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Defines the spacing between cancel icon and text field.
+		 */ 
+		spacing <prop-spacing>;
+	}
+	ToolBar {
+		/**
+		 * Background color for tool bar
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image for tool bar
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Border for tool bar
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Text color for tool bar
+		 */
+		color <prop-color>;
+		/**
+		 * Font for tool bar
+		 */
+		font <prop-font>;
+		/**
+		 * The opacity of the tool bar. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+		/**
+		 * Padding (inner distance) for tool bar
+		 */
+		padding <prop-padding>;
+		/**
+		 * Spacing between the tool items
+		 */
+		spacing <prop-spacing>;
+	}
+	ToolItem {
+		/**
+		 *  Supports animations-types "hoverIn" and "hoverOut". Others are ignored. 
+		 */
+		animation <prop-animation>; 
+		/**
+		 * Background color for tool bar items
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image for tool bar items
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Border for tool bar items
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * Text color for tool bar items
+		 */
+		color <prop-color>;
+		/**
+		 * The opacity of the item. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+		/**
+		 * Padding (inner distance) for tool bar items.
+		 */
+		padding <prop-padding>;
+		/**
+		 * Spacing between the text and icon
+		 */
+		spacing <prop-spacing>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	ToolItem-Separator {
+		/**
+		 * The width of the Separator
+		 */
+		width <prop-width>;
+	}
+	ToolItem-DropDownIcon {
+		/**
+		 * The icon
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Border for the line separating the dropDown-icon
+		 */ 
+		border <prop-border>;
+	}
+	ToolTip {
+		/**
+		 *  Supports animations-types "fadeIn" and "fadeOut". Others are ignored. 
+		 */
+		animation <prop-animation>; 
+		/**
+		 * Background color
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image or gradient for tooltip widget. 
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Border for text tooltip widget.
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * The shadow behind the tooltip.
+		 */
+		box-shadow <prop-box-shadow>;
+		/**
+		 * Text color
+		 */
+		color <prop-color>;
+		/**
+		 * The cursor for the tooltip
+		 */
+		cursor <prop-cursor>;
+		/**
+		 * Text font for tooltips.
+		 */
+		font <prop-font>;
+		/**
+		 * The opacity of the tooltip widget. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+		/**
+		 * Padding for tooltip widget.
+		 */
+		padding <prop-padding>;
+	}
+	ToolTip-Image {
+		/**
+		 * The image URL
+		 */
+		background-image <prop-background-image>;
+	}
+	ToolTip-Text {
+		/**
+		 * Text message color
+		 */
+		color <prop-color>; 
+		/**
+		 * Text font
+		 */
+		font <prop-font>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	ToolTip-Message {
+		/**
+		 * Text message color
+		 */
+		color <prop-color>; 
+		/**
+		 * Text font
+		 */
+		font <prop-font>;
+		/**
+		 * Shadow for text.
+		 */
+		text-shadow <prop-text-shadow>;		
+	}
+	Tree {
+		/**
+		 * Background color for trees.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * The border around the tree including header.
+		 */ 
+		border <prop-border>;
+		/**
+		 * Text color for trees.
+		 */
+		color <prop-color>;
+		/**
+		 * Font for trees.
+		 */
+		font <prop-font>;
+	}
+	TreeItem {
+		/**
+		 * Tree item background color
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Tree item background image/gradient
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Tree item text color
+		 */
+		color <prop-color>;
+		/**
+		 * Decoration for item text.
+		 */
+		text-decoration <prop-text-decoration>;
+		/**
+		 * Shadow for item text.
+		 */ 
+		text-shadow <prop-text-shadow>;
+	}
+	Tree-RowOverlay {
+		/**
+		 * Tree item background color. Supports rgba values
+		 */
+		background-color <prop-background-color>; 
+		/**
+		 * Tree item background image/gradient
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Tree item text color
+		 */
+		color <prop-color>;
+	}
+	TreeColumn {
+		/**
+		 * Background color for tree column headers
+		 */
+		background-color <prop-background-color>; 
+		/**
+		 * Background image or gradient for tree column headers.
+		 */
+		background-image <prop-background-image>;
+		/**
+		 * Border for the bottom line of tree columns headers.
+		 */
+		border-bottom <prop-border-bottom>;
+		/**
+		 * Text color for tree column headers
+		 */
+		color <prop-color>;
+		/**
+		 * Font for tree column headers
+		 */
+		font <prop-font>;
+		/**
+		 * Padding for the content of tree columns headers.
+		 */
+		padding <prop-padding>;
+		/**
+		 * Shadow for item text.
+		 */
+		text-shadow <prop-text-shadow>;
+	}
+	TreeColumn-SortIndicator {
+		/**
+		 * Indicator image for tree sorting (up/down)
+		 */
+		background-image <prop-background-image>;
+	}
+	Tree-Cell {
+		/**
+		 * Defines the padding (i.e. the inner distance between border and content) for a tree cell.
+		 */
+		padding <prop-padding>; 
+		/**
+		 * Defines the spacing between image and text within a tree cell.
+		 */
+		spacing <prop-spacing>;
+	}
+	Tree-GridLine {
+		/**
+		 * Grid line color when linesVisible is true
+		 */
+		color <prop-color>;
+	}
+	Tree-Checkbox {
+		/**
+		 *  Background image for the tree checkbox. The size of the image should be 13 x 13 pixels. 
+		 */
+		background-image <prop-background-image>; 
+		/**
+		 * Space around the check boxes
+		 */
+		margin <prop-margin>;
+	}
+	Tree-Indent {
+		/**
+		 *  Background image for the indention. It is centered within the available area, defined by the "width"-property and the height of the item. The overflow is not visible. 
+		 */
+		background-image <prop-background-image>;
+		/**
+		 *  The indention-width of one level. This property can not be influenced by the states of the element. 
+		 */
+		width <prop-width>;
+	}
+	Display {
+		/**
+		 *  Background image for the display (client area of the browser window). 
+		 */
+		background-image <prop-background-image>; 
+		/**
+		 *  The default system font. Returned by Display#getSystemFont(). 
+		 */
+		font <prop-font>;
+		/**
+		 *  Color used to draw (inner) shadow line in 3d borders. Defines the value of SWT#COLOR_WIDGET_DARK_SHADOW. 
+		 */
+		rwt-darkshadow-color <prop-rwt-darkshadow-color>; 
+		/**
+		 *  The image used for MessageBoxes with style SWT#ICON_ERROR. Also returned by Display#getSystemImage(). 
+		 */
+		rwt-error-image <prop-rwt-error-image>;
+		/**
+		 *  The font list returned by Display#getFontList(). 
+		 */
+		rwt-fontlist <prop-rwt-fontlist>;
+		/**
+		 *  Color used to draw (outer) highlight line in 3d borders. Defines the value of SWT#COLOR_WIDGET_HIGHLIGHT_SHADOW. 
+		 */
+		rwt-highlight-color <prop-rwt-highlight-color>;
+		/**
+		 *  Color used by PopupDialog for its background. Defines the value of SWT#COLOR_INFO_BACKGROUND. 
+		 */
+		rwt-infobackground-color <prop-rwt-infobackground-color>;
+		/**
+		 *  The image used for MessageBoxes with style SWT#ICON_INFORMATION. Also returned by Display#getSystemImage(). 
+		 */
+		rwt-information-image <prop-rwt-information-image>;
+		/**
+		 *  Color used to draw (inner) highlight line in 3d borders. Defines the value of SWT#COLOR_WIDGET_LIGHT_SHADOW. 
+		 */
+		rwt-lightshadow-color <prop-rwt-lightshadow-color>;
+		/**
+		 *  The image used for MessageBoxes with style SWT#ICON_QUESTION. Also returned by Display#getSystemImage(). 
+		 */
+		rwt-question-image <prop-rwt-question-image>;
+		/**
+		 *  Color used to mark selected items like TreeColumns and TabViews. 
+		 */
+		rwt-selectionmarker-color <prop-rwt-selectionmarker-color>;
+		/**
+		 *  Color used to draw (outer) shadow line in 3d borders. Defines the value of SWT#COLOR_WIDGET_NORMAL_SHADOW. 
+		 */
+		rwt-shadow-color <prop-rwt-shadow-color>;
+		/**
+		 *  Color for thin lines as shown by Group, TabFolder headers, Table headers, etc. Defines the value of SWT#COLOR_WIDGET_BORDER. 
+		 */
+		rwt-thinborder-color <prop-rwt-thinborder-color>;
+		/**
+		 *  The image used for MessageBoxes with style SWT#ICON_WARNING. Also returned by Display#getSystemImage(). 
+		 */
+		rwt-warning-image  <prop-rwt-warning-image>;
+		/**
+		 *  The image used for MessageBoxes with style SWT#ICON_WORKING. Also returned by Display#getSystemImage(). 
+		 */
+		rwt-working-image <prop-rwt-working-image>;
+	}
+	Widget-ToolTip {
+		/**
+		 *  Supports animations-types "fadeIn" and "fadeOut". Others are ignored. 
+		 */
+		animation <prop-animation>; 
+		/**
+		 * Background color for tooltips.
+		 */
+		background-color <prop-background-color>;
+		/**
+		 * Background image or gradient for tooltips.
+		 */ 
+		background-image <prop-background-image>;
+		/**
+		 * Outer border for tooltips.
+		 */
+		border <prop-border>;
+		/**
+		 *  Border radius. The border radius has no effect if an enhanced border, like "inset" or "outset" is used. 
+		 */
+		border-radius <prop-border-radius>;
+		/**
+		 * The shadow behind the tooltip.
+		 */
+		box-shadow <prop-box-shadow>;
+		/**
+		 * Text color for tooltips.
+		 */
+		color <prop-color>;
+		/**
+		 * Text font for tooltips.
+		 */
+		font <prop-font>;
+		/**
+		 * The opacity of the tooltip. A value between 0 and 1.
+		 */
+		opacity <prop-opacity>;
+		/**
+		 * Padding around the tooltips text.
+		 */
+		padding <prop-padding>;
+//		text-align <prop-text-align>;
+	}
+	Widget-ToolTip-Pointer {
+		/**
+		 * Background image used to display the pointer.
+		 */
+		background-image <prop-background-image>;
+	}
+	SystemMessage-DisplayOverlay {
+		/**
+		 *  Background color of the overlay. Supports rgba values. 
+		 */
+		background-color <prop-background-color>;
+		/**
+		 *  Background image positioned in the center of the overlay 
+		 */
+		background-image <prop-background-image>;
+	}
+}
