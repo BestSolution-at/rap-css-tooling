@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/at.bestsolution.rap.tooling.feature_1.0.0.qualifier.jar" id="at.bestsolution.rap.tooling.feature" version="1.0.0.qualifier">
+      <category name="rapcss"/>
+   </feature>
+   <category-def name="rapcss" label="RAP CSS Tooling"/>
+</site>
