@@ -133,7 +133,7 @@ package rap {
 	 */
 	image-url = @URL;
 	
-	named-color = [black, gray, silver, white, maroon, red, purple, fuchsia, green, lime, navy, blue, olive, yellow, teal, aqua];
+	named-color = [black | gray | silver | white | maroon | red | purple | fuchsia | green | lime | navy | blue | olive | yellow | teal | aqua];
 	
 	percentage = @NUM ~ %;
 	
