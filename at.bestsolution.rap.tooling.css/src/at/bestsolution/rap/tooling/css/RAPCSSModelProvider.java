@@ -18,7 +18,7 @@ public class RAPCSSModelProvider implements ICSSExtModelProvider {
 	public Collection<CssExtension> getModels(IFile arg0) {
 		if( arg0.getName().endsWith(".rapcss") ) {
 			if( rapModel == null ) {
-				rapModel = loadModel("rap.cssext");
+				rapModel = loadModel("rap");
 			}
 			return Collections.singletonList(rapModel);
 		}
