@@ -41,7 +41,7 @@
 		<repository>
 			<id>efxclipse-tooling</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/efxclipse/update-nightly/site</url>
+			<url>http://download.eclipse.org/efxclipse/updates-nightly/site</url>
 		</repository>
 	</repositories>
 
